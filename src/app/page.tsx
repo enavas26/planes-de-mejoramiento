@@ -6,7 +6,7 @@ type R=Record<string,any>;
 const url=process.env.NEXT_PUBLIC_SUPABASE_URL||"",key=process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY||"";
 const db=url&&key?createClient(url,key):null;
 const nav=[["inicio","Panel general"],["planes","Planes"],["hallazgos","Hallazgos"],["acciones","Acciones"],["seguimientos","Seguimientos"],["evidencias","Evidencias"],["informes","Informes"],["alertas","Alertas"],["importar","Importar Excel"],["respaldos","Respaldos"],["usuarios","Usuarios"],["configuracion","Configuración"]];
-const statusLabel:Record<string,string>={draft:"Borrador",active:"Activo",closed:"Cerrado",archived:"Archivado",pending:"Pendiente",in_progress:"En gestión",submitted:"En revisión",approved:"Aprobado",adjustments_required:"Requiere ajustes",closed:"Cerrada",programado:"Programado",en_proceso:"En proceso",cerrado:"Cerrado"};
+const statusLabel:Record<string,string>={draft:"Borrador",active:"Activo",closed:"Cerrado",archived:"Archivado",pending:"Pendiente",in_progress:"En gestión",submitted:"En revisión",approved:"Aprobado",adjustments_required:"Requiere ajustes",programado:"Programado",en_proceso:"En proceso",cerrado:"Cerrado"};
 const today=()=>new Date().toISOString().slice(0,10);
 const pct=(n:number)=>Math.round(Number(n)||0)+"%";
 export default function Page(){
