@@ -2,13 +2,13 @@
 import {useEffect,useMemo,useState} from "react";
 import {createClient,User} from "@supabase/supabase-js";
 import * as XLSX from "xlsx";
-import "./globals.css";
 type R=Record<string,any>;
 const url=process.env.NEXT_PUBLIC_SUPABASE_URL||"",key=process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY||"";
 const db=url&&key?createClient(url,key):null;
 const nav=[["inicio","Panel general"],["planes","Planes"],["hallazgos","Hallazgos"],["acciones","Acciones"],["seguimientos","Seguimientos"],["evidencias","Evidencias"],["informes","Informes"],["importar","Importar Excel"],["respaldos","Respaldos"],["usuarios","Usuarios"]];
 const statusLabel:Record<string,string>={draft:"Borrador",active:"Activo",closed:"Cerrado",archived:"Archivado",pending:"Pendiente",in_progress:"En gestión",submitted:"En revisión",approved:"Aprobado",adjustments_required:"Requiere ajustes",closed_action:"Cerrada",programado:"Programado",en_proceso:"En proceso",cerrado:"Cerrado"};
 const today=()=>new Date().toISOString().slice(0,10);
+const pct=(n:number)=>Math.round(Number(n)||0)+"%";
 export default function Page(){
  const [user,setUser]=useState<User|null>(null),[email,setEmail]=useState(""),[password,setPassword]=useState(""),[role,setRole]=useState(""),[tab,setTab]=useState("inicio"),[data,setData]=useState<Record<string,R[]>>({}),[busy,setBusy]=useState(false),[error,setError]=useState(""),[notice,setNotice]=useState(""),[search,setSearch]=useState(""),[modal,setModal]=useState(""),[f,setF]=useState<R>({}),[profiles,setProfiles]=useState<R[]>([]),[updates,setUpdates]=useState<R[]>([]),[file,setFile]=useState<File|null>(null),[importRows,setImportRows]=useState<R[]>([]);
  const admin=["Administrador","Coordinador"].includes(role),isAdmin=role==="Administrador";
